@@ -125,6 +125,13 @@ const Verifygold = () => {
           </div>
         </>
       )}
+
+      {/* Logo - Absolute Bottom Right (only in this section) */}
+      <div className="absolute bottom-2 right-2 z-30">
+        <div className="w-40 h-40  text-white flex items-center justify-center ">
+          <img src="/Images/stamp.png"  />
+        </div>
+      </div>
     </main>
   )
 }
@@ -133,79 +140,100 @@ const CertificatePopup = ({ metalData }) => {
   const certificateRef = useRef(null)
   const websiteUrl = "https://dubaigold-barmaker.netlify.app/"
 
-  const downloadCertificate = () => {
-    const printWindow = window.open("", "_blank")
-    const certificateHtml = certificateRef.current.innerHTML
+  const convertImageToBase64 = (url) => {
+    return new Promise((resolve, reject) => {
+      const img = new Image()
+      img.crossOrigin = 'anonymous'
+      img.onload = () => {
+        const canvas = document.createElement('canvas')
+        const ctx = canvas.getContext('2d')
+        canvas.width = img.width
+        canvas.height = img.height
+        ctx.drawImage(img, 0, 0)
+        resolve(canvas.toDataURL('image/png'))
+      }
+      img.onerror = reject
+      img.src = url
+    })
+  }
 
-    const qrSvg = certificateRef.current.querySelector("svg")
-    const svgData = new XMLSerializer().serializeToString(qrSvg)
+  const downloadCertificate = async () => {
+    try {
+      // Convert logo to base64
+      const logoBase64 = await convertImageToBase64('/Images/newlogo.png')
+      
+      const printWindow = window.open("", "_blank")
+      const qrSvg = certificateRef.current.querySelector("svg")
+      const svgData = new XMLSerializer().serializeToString(qrSvg)
 
-    printWindow.document.write(`
-      <!DOCTYPE html>
-      <html>
-      <head>
-        <title>Certificate ${metalData.serial_number}</title>
-        <style>
-          * { margin:0; padding:0; box-sizing:border-box; }
-          body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif; background:white; color:#1f2937; line-height:1.5; }
-          @media print { .no-print{ display:none !important;} }
-          .certificate-container { max-width:672px; margin:0 auto; padding:32px; background:white; }
-          .header { text-align:center; margin-bottom:32px; }
-          .company-title { font-size:2.5rem; font-weight:bold; color:#DB9500; margin-bottom:8px; }
-          .company-subtitle { font-size:.875rem; color:#4b5563; }
-          .certificate-title { text-align:center; margin-bottom:32px; font-size:1.875rem; font-weight:600; color:#1f2937; }
-          .details-section { margin-bottom:32px; }
-          .detail-row { display:flex; justify-content:space-between; align-items:center; padding:12px 0; font-size:1.125rem; border-bottom:1px solid #f3f4f6; }
-          .detail-row:last-child { border-bottom:none; }
-          .detail-label { font-weight:600; color:#1f2937; }
-          .detail-value { color:#374151; text-transform:uppercase; }
-          .detail-value.normal-case { text-transform:none; }
-          .certified-section { margin-bottom:32px; }
-          .certified-title { font-size:1.125rem; font-weight:600; color:#1f2937; margin-bottom:16px; }
-          .seller-text { font-size:.875rem; color:#DB9500; line-height:1.4; }
-          .qr-section { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:24px; }
-        </style>
-      </head>
-      <body>
-        <div class="certificate-container">
-          <div class="header">
-            <div class="company-title">DUBAI Gold/Silver-BarMaker</div>
-            <div class="company-subtitle">Made in Pakistan</div>
+      printWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>Certificate ${metalData.serial_number}</title>
+          <style>
+            * { margin:0; padding:0; box-sizing:border-box; }
+            body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif; background:white; color:#1f2937; line-height:1.5; }
+            @media print { .no-print{ display:none !important;} }
+            .certificate-container { max-width:672px; margin:0 auto; padding:32px; background:white; }
+            .header { text-align:center; margin-bottom:32px; }
+            .header-flex { display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+            .logo { width: 80px; height: 80px; margin-right: 16px; object-fit: contain; }
+            .company-title { font-size:2rem; font-weight:bold; color:#DB9500; margin:0; }
+            .company-subtitle { font-size:1rem; color:#4b5563; margin-top: 8px; }
+            .certificate-title { text-align:center; margin-bottom:32px; font-size:1.875rem; font-weight:600; color:#1f2937; }
+            .details-section { margin-bottom:32px; }
+            .detail-row { display:flex; justify-content:space-between; align-items:center; padding:16px 0; font-size:1.125rem; border-bottom:1px solid #e5e7eb; }
+            .detail-row:last-child { border-bottom:none; }
+            .detail-label { font-weight:600; color:#1f2937; }
+            .detail-value { color:#374151; text-transform:uppercase; }
+            .detail-value.normal-case { text-transform:none; }
+            .qr-section { display:flex; align-items:flex-end; justify-content:flex-start; margin-bottom:24px; }
+            .footer { margin-top: 32px; font-size: 0.875rem; color: #6b7280; text-align: center; }
+          </style>
+        </head>
+        <body>
+          <div class="certificate-container">
+            <div class="header">
+              <div class="header-flex">
+                <img src="${logoBase64}" class="logo" alt="Dubai GoldBarMaker Logo" />
+                <div class="company-title">DUBAI Gold/Silver-BarMaker</div>
+              </div>
+              <div class="company-subtitle">Made in Pakistan</div>
+            </div>
+
+            <div class="certificate-title">Certificate</div>
+
+            <div class="details-section">
+              <div class="detail-row"><span class="detail-label">Metal Type</span><span class="detail-value">${metalData.metal_type}</span></div>
+              <div class="detail-row"><span class="detail-label">Weight</span><span class="detail-value normal-case">${metalData.weight} ${metalData.weight_type}</span></div>
+              <div class="detail-row"><span class="detail-label">Fineness/Purity</span><span class="detail-value normal-case">${metalData.fine_weight}</span></div>
+              <div class="detail-row"><span class="detail-label">Serial Number</span><span class="detail-value normal-case">${metalData.serial_number}</span></div>
+            </div>
+
+            <div class="qr-section">${svgData}</div>
+
+            <div class="footer">
+              <p>This product ${metalData.serial_number} and its certificate are not challengeable in any court of law.</p>
+            </div>
           </div>
+          <script>
+            window.onload = function() {
+              setTimeout(function() {
+                window.print();
+                window.onafterprint = function() { window.close(); }
+              }, 1000);
+            }
+          </script>
+        </body>
+        </html>
+      `)
 
-          <div class="certificate-title">Certificate</div>
-
-          <div class="details-section">
-            <div class="detail-row"><span class="detail-label">Metal Type</span><span class="detail-value">${metalData.metal_type}</span></div>
-            <div class="detail-row"><span class="detail-label">Weight</span><span class="detail-value normal-case">${metalData.weight} ${metalData.weight_type}</span></div>
-            <div class="detail-row"><span class="detail-label">Fineness/Purity</span><span class="detail-value normal-case">${metalData.fine_weight}</span></div>
-            <div class="detail-row"><span class="detail-label">Serial Number</span><span class="detail-value normal-case">${metalData.serial_number}</span></div>
-          </div>
-
-          <div class="certified-section">
-            <div class="certified-title">Certified Seller</div>
-            <div class="seller-text">Dubai<br/>GOLD/SILVER-BARMAKER</div>
-          </div>
-
-          <div class="qr-section">${svgData}</div>
-
-          <div class="mt-8 text-sm text-gray-500 text-center">
-            <p>This product ${metalData.serial_number} and its certificate are not challengeable in any court of law.</p>
-          </div>
-        </div>
-        <script>
-          window.onload = function() {
-            setTimeout(function() {
-              window.print();
-              window.onafterprint = function() { window.close(); }
-            }, 500);
-          }
-        </script>
-      </body>
-      </html>
-    `)
-
-    printWindow.document.close()
+      printWindow.document.close()
+    } catch (error) {
+      console.error('Error downloading certificate:', error)
+      alert('Error downloading certificate. Please try again.')
+    }
   }
 
   return (
@@ -223,35 +251,42 @@ const CertificatePopup = ({ metalData }) => {
         <div ref={certificateRef} className="bg-white p-8 max-w-2xl w-full">
           {/* Header */}
           <div className="text-center mb-8">
-            <div className="text-4xl font-bold text-[#DB9500] mb-2">DUBAI Gold/Silver-BarMaker</div>
-            <div className="text-sm text-gray-600">Made in Pakistan</div>
+            <div className="flex items-center justify-center mb-4">
+              <img
+                src="/Images/newlogo.png"
+                className="w-20 h-20 object-contain mr-4"
+                alt="Dubai GoldBarMaker Logo"
+              />
+              <div className="text-2xl md:text-4xl font-bold text-[#DB9500]">DUBAI Gold/Silver-BarMaker</div>
+            </div>
+            <div className="text-sm md:text-lg text-gray-600">Made in Pakistan</div>
           </div>
 
           {/* Certificate Title */}
           <div className="text-center mb-8 text-3xl font-semibold text-gray-800">Certificate</div>
 
           {/* Certificate Details */}
-          <div className="space-y-4 mb-8 text-lg">
-            <div className="flex justify-between">
+          <div className="space-y-0 mb-8 text-lg">
+            <div className="flex justify-between border-b border-gray-200 py-4">
               <span className="font-semibold text-gray-800">Metal Type</span>
               <span className="text-gray-700 uppercase">{metalData.metal_type}</span>
             </div>
-            <div className="flex justify-between">
+            <div className="flex justify-between border-b border-gray-200 py-4">
               <span className="font-semibold text-gray-800">Weight</span>
               <span className="text-gray-700">{metalData.weight} {metalData.weight_type}</span>
             </div>
-            <div className="flex justify-between">
+            <div className="flex justify-between border-b border-gray-200 py-4">
               <span className="font-semibold text-gray-800">Fineness/Purity</span>
               <span className="text-gray-700">{metalData.fine_weight}</span>
             </div>
-            <div className="flex justify-between">
+            <div className="flex justify-between py-4">
               <span className="font-semibold text-gray-800">Serial Number</span>
               <span className="text-gray-700">{metalData.serial_number}</span>
             </div>
           </div>
 
           {/* QR Code */}
-          <div className="flex items-end justify-between mb-6">
+          <div className="flex items-end justify-start mb-6">
             <QRCodeSVG value={websiteUrl} size={120} level="M" includeMargin={false} />
           </div>
 
