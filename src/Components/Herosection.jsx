@@ -53,7 +53,7 @@ const HeroSection = () => {
         
 
           {/* Main Heading */}
-          <h1 className=" text-[42px]  md:text-8xl font-black text-white mb-4 tracking-wider leading-none">
+          <h1 className=" text-[43px]  md:text-8xl font-black text-white mb-4 tracking-wider leading-none">
             <span className="inline-block animate-fade-in">
               {heroTexts[currentText].title}
             </span>
@@ -65,7 +65,7 @@ const HeroSection = () => {
           </p>
 
           {/* CTA Button */}
-          <button className="group relative bg-gradient-to-r from-yellow-400 to-yellow-500 text-black   md:px-12 px-10 py-4 rounded-full font-bold text-sm  md:text-lg tracking-wide hover:from-yellow-300 hover:to-yellow-400 transform hover:scale-105 transition-all duration-300 shadow-2xl">
+          <button className="group relative bg-gradient-to-r from-yellow-400 to-yellow-500 text-black   md:px-12 px-9 py-4 rounded-full font-bold text-sm  md:text-lg tracking-wide hover:from-yellow-300 hover:to-yellow-400 transform hover:scale-105 transition-all duration-300 shadow-2xl">
             <span className="relative z-10">{heroTexts[currentText].cta}</span>
             <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </button>
