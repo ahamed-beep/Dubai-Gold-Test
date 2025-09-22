@@ -54,7 +54,7 @@ const HeroSection = () => {
 
           {/* Main Heading */}
           <h1 className="text-5xl mx-4 md:mx-0 md:text-8xl font-black text-white mb-4 tracking-wider leading-none">
-            <span className="inline-block animate-fade-in">
+            <span className="inline-block animate-fade-in mx-4 md:mx-0">
               {heroTexts[currentText].title}
             </span>
           </h1>
