@@ -2,49 +2,30 @@
 
 import { useState, useEffect } from "react"
 import { Search, Eye, Edit, X, Filter, Calendar, Weight, Layers } from "lucide-react"
+import axiosInstance from "../../api/axios"
 import { Link } from "react-router-dom"
-
-// Sample data - replace with your actual data
-const sampleMetalsData = [
-  {
-    serial_number: "GLD001",
-    origin: "Dubai",
-    production_date: "2024-01-15",
-    weight_type: "gram",
-    weight: "10",
-    fine_weight: "999.9",
-    metal_type: "gold",
-    username: "admin"
-  },
-  {
-    serial_number: "SLV002",
-    origin: "Karachi",
-    production_date: "2024-02-20",
-    weight_type: "tola",
-    weight: "5",
-    fine_weight: "999.0",
-    metal_type: "silver",
-    username: "manager"
-  },
-  {
-    serial_number: "GLD003",
-    origin: "Lahore",
-    production_date: "2024-03-10",
-    weight_type: "kg",
-    weight: "1",
-    fine_weight: "916.0",
-    metal_type: "gold",
-    username: "operator"
-  }
-]
+import { toast } from "react-toastify"
 
 export default function MiniGoldManagement() {
-  const [metals, setMetals] = useState(sampleMetalsData)
+  const [metals, setMetals] = useState([])
   const [searchTerm, setSearchTerm] = useState("")
   const [weightTypeFilter, setWeightTypeFilter] = useState("all")
   const [metalTypeFilter, setMetalTypeFilter] = useState("all")
   const [dateFilter, setDateFilter] = useState("")
   const [showFilters, setShowFilters] = useState(false)
+
+  // Fetch metals from API
+  useEffect(() => {
+    const fetchMetals = async () => {
+      try {
+        const res = await axiosInstance.get("/metals")
+        setMetals(res.data)
+      } catch (err) {
+        console.error("Error fetching metals:", err)
+      }
+    }
+    fetchMetals()
+  }, [])
 
   // Filter metals based on search & filters
   const filteredData = metals.filter((item) => {
@@ -67,6 +48,20 @@ export default function MiniGoldManagement() {
 
     return matchesSearch && matchesWeightType && matchesMetalType && matchesDate
   })
+
+  const handleDelete = async (id) => {
+    if (window.confirm("Are you sure you want to delete this metal?")) {
+      try {
+        await axiosInstance.delete(`/metals/${id}`);
+        toast.success("Data deleted successfully!");
+        // Optional: remove deleted item from state to update table instantly
+        setMetals((prev) => prev.filter(item => item.id !== id));
+      } catch (error) {
+        console.error(error);
+        toast.error(error.response?.data?.message || "Failed to delete Data.");
+      }
+    }
+  };
 
   const getMetalTypeColor = (metalType) => {
     switch (metalType?.toLowerCase()) {
@@ -115,10 +110,13 @@ export default function MiniGoldManagement() {
           </div>
         </div>
         <div className="flex gap-1 ml-2">
-          <button className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
+          <button 
+            onClick={() => handleDelete(item.id)}
+            className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+          >
             <X className="w-4 h-4" />
           </button>
-          <Link to='/detail'>
+          <Link to={`/detail/${item.id}`}>
             <button className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
               <Edit className="w-4 h-4" />
             </button>
@@ -198,10 +196,13 @@ export default function MiniGoldManagement() {
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
         <div className="flex items-center gap-2">
-          <button className="inline-flex items-center justify-center h-8 w-8 p-0 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-md transition-colors">
+          <button 
+            onClick={() => handleDelete(item.id)}
+            className="inline-flex items-center justify-center h-8 w-8 p-0 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-md transition-colors"
+          >
             <X className="w-4 h-4" />
           </button>
-          <Link to='/detail'>
+          <Link to={`/detail/${item.id}`}>
             <button className="inline-flex items-center justify-center h-8 w-8 p-0 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-md transition-colors">
               <Edit className="h-4 w-4" />
             </button>
