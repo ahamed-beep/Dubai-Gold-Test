@@ -70,14 +70,9 @@ Gold/Silver-BarMaker</p>
           </div>
         </div>
         {/* Bottom section */}
-        <div className=" flex-col hidden md:block lg:flex-row justify-between items-center pt-8 mt-8 border-t border-gray-300">
+        <div className="flex flex-col lg:flex-row justify-between items-center pt-8 mt-8 border-t border-gray-300">
           <p className="text-lg text-blue-100">This product  and its certificate are not challengeable in any court of law.</p>
-           <p className="text-lg mr-3  text-blue-100">Made in Pakistan</p>
-       
-        </div>
-           <div className=" block md:hidden flex-col lg:flex-row justify-start items-start pt-8 mt-8 border-t border-gray-300">
-          <p className="text-lg text-blue-100">This product  and its certificate are not challengeable in any court of law.</p>
-           <p className="text-lg mr-3  text-blue-100">Made in Pakistan</p>
+           <p className="text-lg md:mr-3  mr-10  text-blue-100">Made in Pakistan</p>
        
         </div>
       </div>
