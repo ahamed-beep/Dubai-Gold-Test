@@ -33,15 +33,15 @@ const Navbar = () => {
         <div className="flex items-center">
           <img
             src="/Images/newlogo.png"
-            className=" w-15 h-13  md:w-20 md:h-20 object-contain"
+            className=" w-15 h-15  md:w-20 md:h-20 object-contain"
             alt="Dubai GoldBarMaker Logo"
           />
           <div className="  ">
             <div className="flex flex-col">
-              <div className=" text-[13px] md:text-xl font-bold text-amber-800 leading-tight">
+              <div className=" -ml-2 md:ml-0 text-[13px] md:text-xl font-bold text-amber-800 leading-tight">
                 DUBAI
               </div>
-              <div className=" text-[12px] md:text-base font-semibold text-amber-700">
+              <div className=" -ml-2 md:ml-0 text-[12px] md:text-base font-semibold text-amber-700">
                 Gold/Silver-BarMaker
               </div>
             </div>
