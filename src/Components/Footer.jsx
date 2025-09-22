@@ -63,7 +63,7 @@ Gold/Silver-BarMaker</p>
             <Link to="https://www.facebook.com/share/176CqcbK7x/" className="text-white hover:text-blue-200 transition-colors text-lg">
               FaceBook
             </Link>
-            <Link to="https://www.tiktok.com/@dubai_gold_silver_bar?_t=ZS-8zur7aNhnQV&_r=1" className="text-white md:ml-0 ml-3 hover:text-blue-200 transition-colors text-lg">
+            <Link to="https://www.tiktok.com/@dubai_gold_silver_bar?_t=ZS-8zur7aNhnQV&_r=1" className="text-white md:ml-0 mr-4 hover:text-blue-200 transition-colors text-lg">
               TikTok
             </Link>
          
@@ -72,7 +72,7 @@ Gold/Silver-BarMaker</p>
         {/* Bottom section */}
         <div className="flex flex-col lg:flex-row justify-between items-center pt-8 mt-8 border-t border-gray-300">
           <p className="text-lg text-blue-100">This product  and its certificate are not challengeable in any court of law.</p>
-           <p className="text-lg md:mr-3  mr-20  text-blue-100">Made in Pakistan</p>
+           <p className="text-lg md:mr-3  mr-25  text-blue-100">Made in Pakistan</p>
        
         </div>
       </div>
