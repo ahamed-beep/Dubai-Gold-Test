@@ -52,39 +52,53 @@ const Verifygold = () => {
   const handleCloseModal = () => setShowCertificate(false)
 
   return (
-    <main className="min-h-screen bg-background p-8">
-      <div className="max-w-2xl ">
-        <h1 className="text-4xl mt-10 font-bold text-foreground mb-15 text-start md:ml-25">
-          Verify Your <span className="text-[#F0B100]">Gold</span>
-        </h1>
+    <main className="min-h-screen relative">
+      {/* Background Image Container */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `url('/path/to/your/background-image.jpg')`, // Replace with your image path
+        }}
+      >
+        {/* Optional overlay for better text readability */}
+        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+      </div>
+      
+      {/* Content Container */}
+      <div className="relative z-10 p-8">
+        <div className="max-w-2xl">
+          <h1 className="text-4xl mt-10 font-bold text-white mb-15 text-start md:ml-25">
+           Verification 
+          </h1>
 
-        <div className="space-y-6 md:ml-25 w-full md:w-250">
-          <div className="space-y-2">
-            <label htmlFor="item-serial" className="text-sm font-medium text-muted-foreground">
-              Item serial number
-            </label>
-            <input
-              id="item-serial"
-              type="text"
-              value={serialNumber}
-              onChange={(e) => setSerialNumber(e.target.value)}
-              onKeyPress={handleKeyPress}
-              className="md:w-250 border-gray-300 w-full h-9 px-3 border border-input rounded-md focus:outline-none focus:ring-0 focus:ring-ring focus:border-yellow-300"
-            />
-          </div>
+          <div className="space-y-6 md:ml-25 w-full md:w-250 bg-white bg-opacity-90 p-6 rounded-lg shadow-lg backdrop-blur-sm">
+            <div className="space-y-2">
+              <label htmlFor="item-serial" className="text-sm font-medium text-gray-700">
+                Item serial number
+              </label>
+              <input
+                id="item-serial"
+                type="text"
+                value={serialNumber}
+                onChange={(e) => setSerialNumber(e.target.value)}
+                onKeyPress={handleKeyPress}
+                className="md:w-250 border-gray-300 w-full h-9 px-3 border border-input rounded-md focus:outline-none focus:ring-0 focus:ring-ring focus:border-yellow-300"
+              />
+            </div>
 
-          <hr className="border-t-1 border-gray-300" />
+            <hr className="border-t-1 border-gray-300" />
 
-          {error && <div className="text-red-500 text-sm">{error}</div>}
+            {error && <div className="text-red-500 text-sm">{error}</div>}
 
-          <div className="pt-4">
-            <button
-              type="button"
-              onClick={handleButtonClick}
-              className="bg-yellow-300 hover:bg-yellow-400 text-gray-600 text-sm px-5 py-2 rounded-md transition-colors duration-200"
-            >
-              {loading ? "Loading..." : "VIEW CERTIFICATE"}
-            </button>
+            <div className="pt-4">
+              <button
+                type="button"
+                onClick={handleButtonClick}
+                className="bg-yellow-300 hover:bg-yellow-400 text-gray-600 text-sm px-5 py-2 rounded-md transition-colors duration-200"
+              >
+                {loading ? "Loading..." : "VIEW CERTIFICATE"}
+              </button>
+            </div>
           </div>
         </div>
       </div>
