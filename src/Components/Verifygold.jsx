@@ -127,7 +127,7 @@ const Verifygold = () => {
       )}
 
       {/* Logo - Absolute Bottom Right (only in this section) */}
-      <div className="absolute md:bottom-5 bottom-2  right-2 md:right-5 z-30">
+      <div className="absolute md:bottom-5 bottom-2  right-2 md:right-4 z-30">
         <div className="md:w-25 md:h-25 w-17 h-17  text-white flex items-center justify-center ">
           <img src="/Images/stamp.png"  />
         </div>
