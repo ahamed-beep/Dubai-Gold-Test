@@ -14,10 +14,17 @@ const Navbar = () => {
           />
           <div className="">
             <div className="flex flex-col">
-              <div className="-ml-2 md:ml-0 text-[13px] md:text-xl font-bold text-amber-800 leading-tight">
+              <div className=" ">
+    <div className=" ml-6 md:ml-13 h-3 w-3 md:w-4 md:h-4">
+ <img src="/Images/reg.png"/>
+                
+              </div>
+              <div className="-ml-2 md:ml-0 text-[13px] md:text-xl font-bold text-[#E4B02D] leading-tight">
                 DUBAI
               </div>
-              <div className="-ml-2 md:ml-0 text-[12px] md:text-base font-semibold text-amber-700">
+            
+              </div>
+              <div className="-ml-2 md:ml-0 text-[12px] md:text-base font-semibold text-[#E4B02D]">
                 Gold/Silver-BarMaker
               </div>
             </div>
