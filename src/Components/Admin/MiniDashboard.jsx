@@ -40,7 +40,7 @@ export default function MiniDashboard() {
       case "Show Data":
         return (
          <div>
-          {/* <GoldManagement/> */}
+          <GoldManagement/>
          </div>
         )
 
