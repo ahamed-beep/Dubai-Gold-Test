@@ -60,7 +60,7 @@ const HeroSection = () => {
           </h1>
 
           {/* Subtitle */}
-          <p className="text-xl md:text-2xl text-gray-300 font-light mb-8 tracking-widest">
+          <p className="text-xl md:text-2xl text-gray-300 font-extralight md:font-light mb-8 tracking-widest">
             {heroTexts[currentText].subtitle}
           </p>
 
