@@ -61,19 +61,19 @@ const Verifygold = () => {
         }}
       >
         {/* Optional overlay for better text readability */}
-        <div className="absolute inset-0  bg-opacity-40"></div>
+        <div className="absolute inset-0 bg-transparent bg-opacity-40"></div>
       </div>
       
       {/* Content Container */}
-      <div className="relative z-10 p-8">
-        <div className="max-w-2xl">
-          <h1 className="text-4xl mt-10 font-bold text-white mb-15 text-start md:ml-25">
+      <div className="relative z-10 p-8 flex items-center justify-center min-h-screen">
+        <div className="max-w-2xl w-full flex flex-col items-center">
+          <h1 className="md:text-6xl text-4xl font-bold text-white mb-8 md:mb-12 text-center">
            Verification 
           </h1>
 
-          <div className="space-y-6 md:ml-25 w-full md:w-250  bg-transparent bg-opacity-90 p-6 rounded-lg shadow-lg backdrop-blur-sm">
-            <div className="space-y-2">
-              <label htmlFor="item-serial" className="text-sm font-medium text-gray-700">
+          <div className="space-y-6 w-full max-w-md bg-transparent bg-opacity-90 p-6 rounded-lg shadow-lg backdrop-blur-sm">
+            <div className="space-y-2 flex flex-col items-start">
+              <label htmlFor="item-serial" className="text-sm font-medium text-black text-center">
                 Item serial number
               </label>
               <input
@@ -82,15 +82,15 @@ const Verifygold = () => {
                 value={serialNumber}
                 onChange={(e) => setSerialNumber(e.target.value)}
                 onKeyPress={handleKeyPress}
-                className="md:w-250 border-gray-300 w-full h-9 px-3 border border-input rounded-md focus:outline-none focus:ring-0 focus:ring-ring focus:border-yellow-300"
+                className="w-full max-w-sm border-gray-300 h-9 px-3 border border-input rounded-md focus:outline-none focus:ring-0 focus:ring-ring focus:border-yellow-300"
               />
             </div>
 
-            <hr className="border-t-1 border-gray-300" />
+            <hr className="border-t-1 w-full border-gray-300" />
 
-            {error && <div className="text-red-500 text-sm">{error}</div>}
+            {error && <div className="text-red-500 text-sm text-center">{error}</div>}
 
-            <div className="pt-4">
+            <div className="pt-4 flex justify-start">
               <button
                 type="button"
                 onClick={handleButtonClick}
