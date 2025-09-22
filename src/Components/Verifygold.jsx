@@ -71,7 +71,7 @@ const Verifygold = () => {
            Verification 
           </h1>
 
-          <div className="space-y-6 md:ml-25 w-full md:w-250 bg-white bg-opacity-90 p-6 rounded-lg shadow-lg backdrop-blur-sm">
+          <div className="space-y-6 md:ml-25 w-full md:w-250  bg-transparent bg-opacity-90 p-6 rounded-lg shadow-lg backdrop-blur-sm">
             <div className="space-y-2">
               <label htmlFor="item-serial" className="text-sm font-medium text-gray-700">
                 Item serial number
