@@ -63,7 +63,7 @@ Gold/Silver-BarMaker</p>
             <Link to="https://www.facebook.com/share/176CqcbK7x/" className="text-white hover:text-blue-200 transition-colors text-lg">
               FaceBook
             </Link>
-            <Link to="https://www.tiktok.com/@dubai_gold_silver_bar?_t=ZS-8zur7aNhnQV&_r=1" className="text-white hover:text-blue-200 transition-colors text-lg">
+            <Link to="https://www.tiktok.com/@dubai_gold_silver_bar?_t=ZS-8zur7aNhnQV&_r=1" className="text-white md:ml-0 ml-3 hover:text-blue-200 transition-colors text-lg">
               TikTok
             </Link>
          
