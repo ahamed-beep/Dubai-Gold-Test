@@ -18,9 +18,31 @@ const Verifygold = () => {
     return () => { document.body.style.overflow = "unset" }
   }, [showCertificate])
 
+  const fetchMetalData = async () => {
+    if (!serialNumber) {
+      alert("Please enter serial number")
+      return
+    }
 
+    setLoading(true)
+    setError("")
+    try {
+      const response = await axiosInstance.get(`/metals/${serialNumber}`)
+      setMetalData(response.data.data)
+      setShowCertificate(true)
+    } catch (err) {
+      setError("Serial number not found")
+      setMetalData(null)
+      setShowCertificate(false)
+    } finally {
+      setLoading(false)
+    }
+  }
 
- 
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    fetchMetalData()
+  }
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter") handleSubmit(e)
