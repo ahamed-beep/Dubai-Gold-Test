@@ -72,7 +72,7 @@ Gold/Silver-BarMaker</p>
         {/* Bottom section */}
         <div className="flex flex-col lg:flex-row justify-between items-center pt-8 mt-8 border-t border-gray-300">
           <p className="text-lg text-blue-100">This product  and its certificate are not challengeable in any court of law.</p>
-           <p className="text-lg md:mr-3  mr-38 mt-2  text-blue-100">Made in Pakistan</p>
+           <p className="text-lg md:mr-3  mr-36 mt-2  text-blue-100">Made in Pakistan</p>
        
         </div>
       </div>
