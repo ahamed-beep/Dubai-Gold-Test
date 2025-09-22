@@ -57,7 +57,7 @@ const Verifygold = () => {
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `url('/path/to/your/background-image.jpg')`, // Replace with your image path
+          backgroundImage: `url('/Images/burj.png')`, // Replace with your image path
         }}
       >
         {/* Optional overlay for better text readability */}
