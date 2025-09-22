@@ -21,7 +21,7 @@ const App = () => {
       />
       <BrowserRouter>
         <Routes>
-          {/* <Route element={<Mainsection />} path='/' /> */}
+          <Route element={<Mainsection />} path='/' />
           <Route element={<AdminLogin />} path='/login' />
           <Route element={<DetailPage />} path='/detail' />
 
@@ -37,7 +37,7 @@ const App = () => {
           /> */}
 
             <Route
-            path='/'
+            path='/admin-dashboard'
             element={
               
                 <CombineDashboard />

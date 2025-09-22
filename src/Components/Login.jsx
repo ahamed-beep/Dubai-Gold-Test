@@ -29,11 +29,7 @@ const AdminLogin = () => {
       try{
         console.log("Sending", { email, password });
 
-        const response = await axiosInstance.post('/login', { email, password });
-        setEmail("");
-        setPassword("");
-     toast.success('login successfull')
-     localStorage.setItem("token", response.data.token); // 👈 must be plain string
+    
 
 
       navigate('/admin-dashboard');
