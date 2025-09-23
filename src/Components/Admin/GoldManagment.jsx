@@ -5,7 +5,6 @@ import { Search, Eye, Edit, X } from "lucide-react"
 import axiosInstance from "../../api/axios"
 import { Link } from "react-router-dom"
 import { toast } from "react-toastify"
-import MiniGoldManagement from "./MiniGoldManagement" // Fixed import path
 
 export default function GoldManagement() {
   const [metals, setMetals] = useState([])
@@ -89,9 +88,7 @@ export default function GoldManagement() {
 
   return (
     <div>
-      <div className="block md:hidden">
-        <MiniGoldManagement />
-      </div>
+   
       <div className="hidden md:block">
         <div className="min-h-screen bg-gray-50 p-6">
           <div className="max-w-7xl mx-auto">
