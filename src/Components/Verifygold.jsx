@@ -18,14 +18,39 @@ const Verifygold = () => {
     return () => { document.body.style.overflow = "unset" }
   }, [showCertificate])
 
+  // Generate random metal data
+  const generateRandomMetalData = () => {
+    const metalTypes = ["GOLD", "SILVER", "PLATINUM"]
+    const weightTypes = ["gm", "oz", "kg"]
+    const weights = ["10", "20", "50", "100", "250", "500", "1000"]
+    const purities = ["99.9%", "99.5%", "24K", "22K", "18K", "999", "925"]
+    
+    const randomSerialNumber = Math.random().toString(36).substring(2, 15).toUpperCase()
+    
+    return {
+      metal_type: metalTypes[Math.floor(Math.random() * metalTypes.length)],
+      weight: weights[Math.floor(Math.random() * weights.length)],
+      weight_type: weightTypes[Math.floor(Math.random() * weightTypes.length)],
+      fine_weight: purities[Math.floor(Math.random() * purities.length)],
+      serial_number: randomSerialNumber
+    }
+  }
+
   const fetchMetalData = async () => {
-    if (!serialNumber) {
-      alert("Please enter serial number")
+    setLoading(true)
+    setError("")
+    
+    // If no serial number is entered, generate random data
+    if (!serialNumber.trim()) {
+      setTimeout(() => {
+        const randomData = generateRandomMetalData()
+        setMetalData(randomData)
+        setShowCertificate(true)
+        setLoading(false)
+      }, 1000) // Add a small delay to simulate loading
       return
     }
 
-    setLoading(true)
-    setError("")
     try {
       const response = await axiosInstance.get(`/metals/${serialNumber}`)
       setMetalData(response.data.data)
@@ -71,8 +96,8 @@ const Verifygold = () => {
            Verification 
           </h1>
 
-          <div className="space-y-6 w-full max-w-md bg-transparent bg-opacity-90 p-6 rounded-lg shadow-lg backdrop-blur-sm">
-            <div className="space-y-2 flex flex-col items-start">
+          <div className="space-y-6 w-full max-w-sm bg-transparent bg-opacity-90 p-6 rounded-lg shadow-lg backdrop-blur-sm">
+            <div className="space-y-2 flex flex-col items-center">
               <label htmlFor="item-serial" className="text-sm font-medium text-black text-center">
                 Item serial number
               </label>
@@ -82,15 +107,14 @@ const Verifygold = () => {
                 value={serialNumber}
                 onChange={(e) => setSerialNumber(e.target.value)}
                 onKeyPress={handleKeyPress}
+                placeholder="Enter serial number or leave empty for demo"
                 className="w-full max-w-sm border-gray-300 h-9 px-3 border border-input rounded-md focus:outline-none focus:ring-0 focus:ring-ring focus:border-yellow-300"
               />
             </div>
 
-            <hr className="border-t-1 w-full border-gray-300" />
-
             {error && <div className="text-red-500 text-sm text-center">{error}</div>}
 
-            <div className="pt-4 flex justify-start">
+            <div className="pt-4 flex justify-center">
               <button
                 type="button"
                 onClick={handleButtonClick}
@@ -127,8 +151,8 @@ const Verifygold = () => {
       )}
 
       {/* Logo - Absolute Bottom Right (only in this section) */}
-      <div className="absolute md:bottom-5 bottom-2  right-2 md:right-4 z-30">
-        <div className="md:w-25 md:h-25 w-17 h-17  text-white flex items-center justify-center ">
+      <div className="absolute bottom-5 right-5 z-30">
+        <div className="w-25 h-25  text-white flex items-center justify-center ">
           <img src="/Images/stamp.png"  />
         </div>
       </div>
@@ -257,7 +281,15 @@ const CertificatePopup = ({ metalData }) => {
                 className="w-20 h-20 object-contain mr-4"
                 alt="Dubai GoldBarMaker Logo"
               />
+              <div>
+
+   <div className=" ml-80 md:ml-120 h-3 w-3 md:w-4 md:h-4">
+ <img src="/Images/reg.png"/>
+                
+              </div>
+
               <div className="text-2xl md:text-4xl font-bold text-[#DB9500]">DUBAI Gold/Silver-BarMaker</div>
+              </div>
             </div>
             <div className="text-sm md:text-lg text-gray-600">Made in Pakistan</div>
           </div>
